@@ -1,9 +1,7 @@
 import { combineReducers, createStore } from 'redux';
-import {reducer, State} from './reducers';
+import {reducer} from './reducers';
 
-interface RootState {
-    task: State;
-  }
+
 
 const store = createStore<RootState, any, any, any>(
     combineReducers({
