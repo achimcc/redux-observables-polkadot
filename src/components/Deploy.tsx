@@ -1,6 +1,5 @@
-import React, { BaseSyntheticEvent, SyntheticEvent, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import InputFile from './InputFile/InputFile';
 
 const Deploy = () => {
 	const dispatch = useDispatch();
@@ -14,7 +13,6 @@ const Deploy = () => {
 		dispatch({ type: 'Deploy', payload: { gas: gas, endowment: endowment } });
 	return (
 		<>
-			<InputFile onChange={onUpload} />
 			<input onChange={onChangeGas} value={gas} />
 			<input onChange={onChangeEndowment} value={endowment} />
 			<button onClick={onDeploy}>Deploy</button>

@@ -13,8 +13,6 @@ function App() {
 		<Provider store={store}>
 			<div className="App">
 				<header className="App-header">
-					<Display />
-					<IncDec />
 					<Instantiate />
 					<Deploy />
 					<img src={logo} className="App-logo" alt="logo" />
