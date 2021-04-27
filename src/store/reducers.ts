@@ -3,7 +3,8 @@ import { Observable } from 'rxjs';
 
 export interface State {
 	count: number;
-	api: ApiRx;
+	api: ApiRx | undefined;
+	wasm: Uint8Array | undefined;
 }
 
 export interface Action {
@@ -13,20 +14,20 @@ export interface Action {
 
 const initialState: State = {
 	count: 0,
-	api: new ApiRx(),
+	api: undefined,
+	wasm: undefined,
 };
 
 export const reducer = (state: State = initialState, action: Action): State => {
 	switch (action.type) {
-		case 'Inc':
-			return { count: state.count + 1, api: state.api };
-		case 'Dec':
-			return { count: state.count - 1, api: state.api };
 		case 'Subscribed': {
 			console.log('Subscribed!', action.payload, state);
-			return { count: state.count, api: action.payload as ApiRx };
+			return { api: action.payload as ApiRx, ...state };
 		}
-
+		case 'Upload': {
+			console.log('Subscribed!', action.payload, state);
+			return { wasm: action.payload as Uint8Array, ...state };
+		}
 		default:
 			return state;
 	}
