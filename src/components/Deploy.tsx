@@ -2,6 +2,9 @@ import { RcFile, UploadChangeParam } from 'antd/lib/upload';
 import React, { BaseSyntheticEvent, SyntheticEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import InputFile from './InputFile/InputFile';
+import { Button } from 'antd';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
 
 const Deploy = () => {
 	const dispatch = useDispatch();
@@ -17,13 +20,19 @@ const Deploy = () => {
 	const onUploadAbi = (file: UploadChangeParam): void => {
 		dispatch({ type: 'UploadAbi', payload: file });
 	};
+	const { isAbiUploaded, isApiConneected, isWasmUploaded } = useSelector(
+		(store: RootState) => store.ui
+	);
+	const isReadyToDeploy = isAbiUploaded && isApiConneected && isWasmUploaded;
 	return (
 		<>
 			<InputFile action={onUploadWasm} label={'Upload Wasm'} />
 			<InputFile action={onUploadAbi} label={'Upload Abi'} />
 			<input onChange={onChangeGas} value={gas} />
 			<input onChange={onChangeEndowment} value={endowment} />
-			<button onClick={onDeploy}>Deploy</button>
+			<Button disabled={!isReadyToDeploy} onClick={onDeploy}>
+				Deploy
+			</Button>
 		</>
 	);
 };
