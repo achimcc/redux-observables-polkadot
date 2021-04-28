@@ -1,16 +1,17 @@
 import { Upload, message, Button } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import * as React from 'react';
-import { UploadChangeParam } from 'antd/lib/upload';
+import { RcFile, UploadChangeParam } from 'antd/lib/upload';
 
 interface props {
-	onChange: (info: UploadChangeParam) => void;
+	action: (file: UploadChangeParam) => void;
+	label: string;
 }
 
-const InputFile = ({ onChange }: props) => {
+const InputFile = ({ action, label }: props) => {
 	return (
-		<Upload onChange={onChange}>
-			<Button icon={<UploadOutlined />}>Click to Upload</Button>
+		<Upload onChange={action}>
+			<Button icon={<UploadOutlined />}>{label}</Button>
 		</Upload>
 	);
 };
