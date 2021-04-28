@@ -4,8 +4,8 @@ import { map, switchMap } from 'rxjs/operators';
 import { ApiRx } from '@polkadot/api';
 
 export const connect = (action$: ActionsObservable<Action>) =>
-	action$.ofType('Instantiate').pipe(
-		map(action => new ApiRx(action.payload)),
+	action$.ofType('Connect').pipe(
+		map(action => new ApiRx()),
 		switchMap((api: ApiRx) => api.isReady),
 		map(api => ({ type: 'Connected', payload: api }))
 	);
