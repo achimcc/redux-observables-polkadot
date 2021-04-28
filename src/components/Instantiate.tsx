@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-const IncDec = () => {
+const Instantiate = () => {
 	const dispatch = useDispatch();
 	const onInstantiate = () => dispatch({ type: 'Instantiate' });
 	return (
@@ -11,4 +11,4 @@ const IncDec = () => {
 	);
 };
 
-export default IncDec;
+export default Instantiate;

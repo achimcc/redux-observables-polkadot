@@ -1,5 +1,5 @@
-import { RcFile, UploadChangeParam } from 'antd/lib/upload';
-import React, { BaseSyntheticEvent, SyntheticEvent, useState } from 'react';
+import { UploadChangeParam } from 'antd/lib/upload';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import InputFile from './InputFile/InputFile';
 import { Button } from 'antd';
@@ -20,10 +20,10 @@ const Deploy = () => {
 	const onUploadAbi = (file: UploadChangeParam): void => {
 		dispatch({ type: 'UploadAbi', payload: file });
 	};
-	const { isAbiUploaded, isApiConneected, isWasmUploaded } = useSelector(
+	const { isAbiUploaded, isApiConnected, isWasmUploaded } = useSelector(
 		(store: RootState) => store.ui
 	);
-	const isReadyToDeploy = isAbiUploaded && isApiConneected && isWasmUploaded;
+	const isReadyToDeploy = isAbiUploaded && isApiConnected && isWasmUploaded;
 	return (
 		<>
 			<InputFile action={onUploadWasm} label={'Upload Wasm'} />
@@ -33,6 +33,7 @@ const Deploy = () => {
 			<Button disabled={!isReadyToDeploy} onClick={onDeploy}>
 				Deploy
 			</Button>
+			{isAbiUploaded} {isApiConnected} {isWasmUploaded}
 		</>
 	);
 };

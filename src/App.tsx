@@ -8,10 +8,9 @@ function App() {
 	return (
 		<Provider store={store}>
 			<div className="App">
-				<header className="App-header">
-					<Instantiate />
-					<Deploy />
-				</header>
+				<header className="App-header"></header>
+				<Instantiate />
+				<Deploy />
 			</div>
 		</Provider>
 	);

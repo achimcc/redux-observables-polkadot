@@ -1,13 +1,13 @@
 import { Action } from './actions';
 
 export interface UiState {
-	isApiConneected: boolean;
+	isApiConnected: boolean;
 	isWasmUploaded: boolean;
 	isAbiUploaded: boolean;
 }
 
 const initialState: UiState = {
-	isApiConneected: false,
+	isApiConnected: false,
 	isWasmUploaded: false,
 	isAbiUploaded: false,
 };
@@ -19,7 +19,7 @@ const contractReducer = (
 	switch (action.type) {
 		case 'Subscribed': {
 			console.log('Subscribed!', action.payload, state);
-			return { ...state, isApiConneected: true };
+			return { ...state, isApiConnected: true };
 		}
 		case 'UploadWasmSuccess': {
 			return { ...state, isWasmUploaded: true };
