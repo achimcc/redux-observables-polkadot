@@ -1,5 +1,5 @@
 import { ActionsObservable } from 'redux-observable';
-import { Action } from '../store/reducers';
+import { Action } from '../reducers/actions';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { ApiRx } from '@polkadot/api';
 

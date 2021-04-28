@@ -5,7 +5,7 @@ import { RootState } from '../store/store';
 const Display = () => {
 	const store = useSelector((store: RootState) => store);
 	console.log('store: ', store);
-	return <>{store.task.count}</>;
+	return <>{store.contract.count}</>;
 };
 
 export default Display;

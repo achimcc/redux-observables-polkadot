@@ -1,5 +1,5 @@
 import { ActionsObservable } from 'redux-observable';
-import { Action } from '../store/reducers';
+import { Action } from '../reducers/actions';
 import { map, mergeMap } from 'rxjs/operators';
 import { UploadChangeParam } from 'antd/lib/upload';
 import { from } from 'rxjs';

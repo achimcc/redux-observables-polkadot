@@ -1,26 +1,24 @@
 import { ApiRx } from '@polkadot/api';
-import { Observable } from 'rxjs';
+import { Action } from './actions';
 
-export interface State {
+export interface ContractState {
 	count: number;
 	api: ApiRx | undefined;
 	wasm: Uint8Array | undefined;
 	abi: JSON | undefined;
 }
 
-export interface Action {
-	type: string;
-	payload: object;
-}
-
-const initialState: State = {
+const initialState: ContractState = {
 	count: 0,
 	api: undefined,
 	wasm: undefined,
 	abi: undefined,
 };
 
-export const reducer = (state: State = initialState, action: Action): State => {
+const contractReducer = (
+	state: ContractState = initialState,
+	action: Action
+): ContractState => {
 	switch (action.type) {
 		case 'Subscribed': {
 			console.log('Subscribed!', action.payload, state);
@@ -38,3 +36,5 @@ export const reducer = (state: State = initialState, action: Action): State => {
 			return state;
 	}
 };
+
+export default contractReducer;
