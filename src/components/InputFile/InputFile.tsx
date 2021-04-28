@@ -1,7 +1,7 @@
-import { Upload, message, Button } from 'antd';
+import { Upload, Button } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import * as React from 'react';
-import { RcFile, UploadChangeParam } from 'antd/lib/upload';
+import { UploadChangeParam } from 'antd/lib/upload';
 
 interface props {
 	action: (file: UploadChangeParam) => void;

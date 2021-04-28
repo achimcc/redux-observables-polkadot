@@ -17,8 +17,8 @@ const contractReducer = (
 	action: Action
 ): UiState => {
 	switch (action.type) {
-		case 'Subscribed': {
-			console.log('Subscribed!', action.payload, state);
+		case 'Connected': {
+			console.log('Connected!');
 			return { ...state, isApiConnected: true };
 		}
 		case 'UploadWasmSuccess': {

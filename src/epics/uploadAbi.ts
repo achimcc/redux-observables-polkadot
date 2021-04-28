@@ -12,5 +12,5 @@ export const uploadAbi = (action$: ActionsObservable<Action>, state$: any) =>
 			return from(promise);
 		}),
 		map(arrayBuffer => JSON.parse(JSON.stringify(arrayBuffer))),
-		map(wasm => ({ type: 'UploadWasmSuccess', payload: wasm }))
+		map(wasm => ({ type: 'UploadAbiSuccess', payload: wasm }))
 	);

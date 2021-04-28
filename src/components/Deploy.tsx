@@ -33,7 +33,8 @@ const Deploy = () => {
 			<Button disabled={!isReadyToDeploy} onClick={onDeploy}>
 				Deploy
 			</Button>
-			{isAbiUploaded} {isApiConnected} {isWasmUploaded}
+			{isAbiUploaded && 'check1'} {isApiConnected && 'check2'}{' '}
+			{isWasmUploaded && 'check3'}
 		</>
 	);
 };

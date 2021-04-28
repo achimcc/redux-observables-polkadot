@@ -2,14 +2,12 @@ import { ApiRx } from '@polkadot/api';
 import { Action } from './actions';
 
 export interface ContractState {
-	count: number;
 	api: ApiRx | undefined;
 	wasm: Uint8Array | undefined;
 	abi: JSON | undefined;
 }
 
 const initialState: ContractState = {
-	count: 0,
 	api: undefined,
 	wasm: undefined,
 	abi: undefined,
@@ -20,7 +18,7 @@ const contractReducer = (
 	action: Action
 ): ContractState => {
 	switch (action.type) {
-		case 'Subscribed': {
+		case 'Connected': {
 			console.log('Subscribed!', action.payload, state);
 			return { ...state, api: action.payload as ApiRx };
 		}
