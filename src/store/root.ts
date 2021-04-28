@@ -12,7 +12,7 @@ export const rootReducer = combineReducers({
 	task: reducer,
 });
 
-export const rootEpic = combineEpics(
+export const rootEpic = combineEpics<Action, Action>(
 	instantiate,
 	deploy,
 	uploadAbi,

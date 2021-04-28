@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 export interface State {
 	count: number;
 	api: ApiRx | undefined;
+	wasm: Uint8Array | undefined;
+	abi: JSON | undefined;
 }
 
 export interface Action {
@@ -14,23 +16,24 @@ export interface Action {
 const initialState: State = {
 	count: 0,
 	api: undefined,
+	wasm: undefined,
+	abi: undefined,
 };
 
 export const reducer = (state: State = initialState, action: Action): State => {
 	switch (action.type) {
-		case 'Inc':
-			return { count: state.count + 1, api: state.api };
-		case 'Dec':
-			return { count: state.count - 1, api: state.api };
 		case 'Subscribed': {
 			console.log('Subscribed!', action.payload, state);
-			return { count: state.count, api: action.payload as ApiRx };
+			return { ...state, api: action.payload as ApiRx };
 		}
 		case 'UploadWasmSuccess': {
 			console.log('success wasm!');
-			return state;
+			return { ...state, wasm: action.payload as Uint8Array };
 		}
-
+		case 'UploadAbiSuccess': {
+			console.log('success abi!');
+			return { ...state, abi: action.payload as JSON };
+		}
 		default:
 			return state;
 	}

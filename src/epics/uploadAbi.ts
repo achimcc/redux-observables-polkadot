@@ -7,9 +7,10 @@ import { from } from 'rxjs';
 export const uploadAbi = (action$: ActionsObservable<Action>, state$: any) =>
 	action$.ofType('UploadAbi').pipe(
 		mergeMap(action => {
-			const promise = (action.payload as UploadChangeParam).file.originFileObj.text();
+			const promise = ((action as any)
+				.payload as UploadChangeParam).file.originFileObj.text();
 			return from(promise);
 		}),
 		map(arrayBuffer => JSON.parse(JSON.stringify(arrayBuffer))),
-		map(abi => ({ type: 'UploadAbiSuccess', payload: abi }))
+		map(wasm => ({ type: 'UploadWasmSuccess', payload: wasm }))
 	);
