@@ -2,16 +2,13 @@ import { ActionsObservable } from 'redux-observable';
 import { Action } from '../store/reducers';
 import { filter, map, mergeMap } from 'rxjs/operators';
 import { compactAddLength, isWasm } from '@polkadot/util';
-import { RcFile, UploadChangeParam } from 'antd/lib/upload';
-import { Observable } from '@polkadot/types/types';
-import { formatNumber, hexToU8a, isHex, u8aToString } from '@polkadot/util';
+import { UploadChangeParam } from 'antd/lib/upload';
+import { hexToU8a, isHex, u8aToString } from '@polkadot/util';
 import { from } from 'rxjs';
-import { Abi } from '@polkadot/api-contract';
 
 const BYTE_STR_0 = '0'.charCodeAt(0);
 const BYTE_STR_X = 'x'.charCodeAt(0);
 const STR_NL = '\n';
-const NOOP = (): void => undefined;
 
 function convertResult(result: ArrayBuffer): Uint8Array {
 	const data = new Uint8Array(result);
