@@ -1,8 +1,8 @@
 import { ActionsObservable } from 'redux-observable';
 import { Action } from '../reducers/actions';
-import { filter, map, mergeMap } from 'rxjs/operators';
+import { filter, map, mergeMap, switchMap } from 'rxjs/operators';
 import { from, of } from 'rxjs';
-import { ApiRx, Keyring, ApiPromise } from '@polkadot/api';
+import { ApiRx, Keyring, ApiPromise, WsProvider } from '@polkadot/api';
 import {
 	CodeRx,
 	CodePromise,
@@ -14,19 +14,26 @@ import { SubmittableExtrinsic } from '@polkadot/api/types';
 
 export const deploy = (action$: ActionsObservable<Action>, state$: any) =>
 	action$.ofType('Deploy').pipe(
-		mergeMap((action: Action) => {
-			console.log('state: ', state$);
+		mergeMap(async action => {
 			const abi = (state$ as any).value.contract.abi as AnyJson;
 			const wasm = (state$ as any).value.contract.wasm as Uint8Array;
-			const apiTest = new ApiPromise();
-			const test = new CodePromise(apiTest, abi, wasm);
+			const provider = new WsProvider('ws://127.0.0.1:9944');
+			console.log('instantiate api!');
+			const api = await ApiPromise.create({ provider });
+			console.log('api is ready: ', api);
+			const contract = api.tx.contracts.instantiateWithCode(
+				(action.payload as any).endowment,
+				(action.payload as any).gas,
+				wasm,
+				JSON.stringify(abi),
+				''
+			);
 			const keyring = new Keyring({ type: 'sr25519' });
 			const alice = keyring.addFromUri('//Alice');
-			const tx = test.tx.new(0, 0, 0).signAndSend(alice);
-			return from(tx);
+			return contract.signAndSend(alice);
 		}),
 		map(tx => {
-			console.log('code: ', tx);
+			console.log('nextStep: ', tx);
 			return { type: 'Any', payload: {} };
 		})
 	);

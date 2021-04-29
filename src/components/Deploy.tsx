@@ -23,7 +23,7 @@ const Deploy = () => {
 	const { isAbiUploaded, isApiConnected, isWasmUploaded } = useSelector(
 		(store: RootState) => store.ui
 	);
-	const isReadyToDeploy = isAbiUploaded && isApiConnected && isWasmUploaded;
+	const isReadyToDeploy = isAbiUploaded && isWasmUploaded;
 	return (
 		<>
 			<InputFile action={onUploadWasm} label={'Upload Wasm'} />
